@@ -54,31 +54,32 @@ pipelines:
           pipevar1: 1
           pipevar2: 2
     steps:
-#       - name: trigger_1
-#         type: Bash
-#         configuration:
-#           affinityGroup: trigger
-#           environmentVariables:
-#             env1: 1
-#             env2:
-#               default: 2
-#               description: someDescription
-#           priority: 0
-#           inputResources:
-#             - name: buildInfoTrigger
-#             - name: gitResCanvas
-#             - name: propertyCanvas2
-#             - name: incomw
-#         execution:
-#           onExecute:
-#             - printenv
-#             - echo "done"
-#       - name: jenkins
-#         type: Jenkins
-#         configuration:
-#           jenkinsJobName: somename
-#           integrations:
-#             - name: jenkins
+      - name: trigger_1
+        type: Bash
+        configuration:
+          affinityGroup: trigger
+          environmentVariables:
+            env1: 1
+            env2:
+              default: 2
+              description: someDescription
+          priority: 0
+          inputResources:
+            - name: buildInfoTrigger
+            - name: gitResCanvas
+            - name: propertyCanvas2
+            - name: incomw
+        execution:
+          onExecute:
+            - printenv
+            - echo "done"
+            - sleep 100
+      - name: jenkins
+        type: Jenkins
+        configuration:
+          jenkinsJobName: somename
+          integrations:
+            - name: jenkins
       - name: trigger_2
         type: Bash
         configuration:
@@ -86,8 +87,8 @@ pipelines:
           environmentVariables:
             step2env1: 1
             step2env2: 2
-#           inputSteps:
-#             - name: trigger_1
+          inputSteps:
+            - name: trigger_1
 #             - name: jenkins
 #           inputResources:
 #             - name: propertyCanvas2
