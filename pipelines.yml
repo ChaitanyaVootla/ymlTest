@@ -58,6 +58,7 @@ pipelines:
         type: Bash
         configuration:
           affinityGroup: trigger
+          timeoutSeconds: 10
           environmentVariables:
             env1: 1
             env2:
@@ -73,8 +74,7 @@ pipelines:
           onExecute:
             - printenv
             - echo "done"
-            - exit 125
-            - sleep 30
+            - sleep 20
 #       - name: jenkins
 #         type: Jenkins
 #         configuration:
