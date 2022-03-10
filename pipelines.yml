@@ -74,12 +74,12 @@ pipelines:
             - printenv
             - echo "done"
             - sleep 100
-      - name: jenkins
-        type: Jenkins
-        configuration:
-          jenkinsJobName: somename
-          integrations:
-            - name: jenkins
+#       - name: jenkins
+#         type: Jenkins
+#         configuration:
+#           jenkinsJobName: somename
+#           integrations:
+#             - name: jenkins
       - name: trigger_2
         type: Bash
         configuration:
