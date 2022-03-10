@@ -65,10 +65,10 @@ pipelines:
               default: 2
               description: someDescription
           priority: 0
-#           inputResources:
+          inputResources:
 #             - name: buildInfoTrigger
 #             - name: gitResCanvas
-#             - name: propertyCanvas2
+            - name: propertyCanvas2
 #             - name: incomw
         execution:
           onExecute:
