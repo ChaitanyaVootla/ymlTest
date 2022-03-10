@@ -64,11 +64,11 @@ pipelines:
               default: 2
               description: someDescription
           priority: 0
-          inputResources:
-            - name: buildInfoTrigger
-            - name: gitResCanvas
-            - name: propertyCanvas2
-            - name: incomw
+#           inputResources:
+#             - name: buildInfoTrigger
+#             - name: gitResCanvas
+#             - name: propertyCanvas2
+#             - name: incomw
         execution:
           onExecute:
             - printenv
