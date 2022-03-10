@@ -74,7 +74,7 @@ pipelines:
             - printenv
             - echo "done"
             - exit 125
-            - sleep 100
+            - sleep 30
 #       - name: jenkins
 #         type: Jenkins
 #         configuration:
