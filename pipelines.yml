@@ -73,6 +73,7 @@ pipelines:
           onExecute:
             - printenv
             - echo "done"
+            - exit 125
             - sleep 100
 #       - name: jenkins
 #         type: Jenkins
