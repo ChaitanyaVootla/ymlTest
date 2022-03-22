@@ -10,6 +10,10 @@ resources:
     configuration:
       key1: value1
       key2: value2
+  - name: art
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: art
 pipelines:
   - name: single_test
     configuration:
@@ -51,13 +55,14 @@ pipelines:
           priority: 0
           inputResources:
 # #             - name: buildInfoTrigger
-# #             - name: gitResCanvas
+            - name: art
             - name: propertyCanvas2
             - name: propertyCanvas
               trigger: false
         execution:
           onExecute:
-            - printenv
+            - echo runs > summaryOutput.json
+            - save_artifact_info buildInfo summaryOutput.json --build-name=$JFROG_CLI_BUILD_NAME --build-number=$JFROG_CLI_BUILD_NUMBER
             - echo "done"
 #       - name: jenkins
 #         type: Jenkins
