@@ -1,0 +1,28 @@
+
+pipelines:
+  - name: embedTest
+    steps:
+      - name: triggerTest
+        type: TriggerPipeline
+        configuration:
+      ## these options are required for identifying the step that
+      ## the user would like to trigger. In some cases, pipelineName
+      ## and stepName may be too ambiguous. In those cases, the 
+      ## embedded pipeline step will fail with a clear log. In those
+      ## cases, projectKey and/or branchName may be required.
+          pipelineName: testPipeline # required
+          stepName: myStep # required. will fail the step if ambiguous
+          branchName: feature/pipe-1234 # optional. May be necessary if other criteria are too ambiguous. No default.
+          projectKey: ${project_key} # optional. Default is current project.
+      ## execution is similar to other native steps where user can 
+      ## customize onStart, onSuccess, onFailure, onComplete, but cannot
+      ## specify an onExecute section.
+          execution:
+            onStart:
+              - echo “triggering the nested run”
+            onSuccess:
+              - echo “it worked! $nested_run_status”
+            onFailure:
+              - echo “it failed... $nested_run_status”
+            onComplete:
+              - echo “sending some messages...”
