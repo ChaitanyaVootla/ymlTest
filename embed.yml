@@ -5,9 +5,9 @@ pipelines:
       - name: triggerTest
         type: TriggerPipeline
         configuration:
-          pipelineName: testPipeline # required
-          stepName: myStep # required. will fail the step if ambiguous
-          branchName: feature/pipe-1234 # optional. May be necessary if other criteria are too ambiguous. No default.
+          pipelineName: embed_trigger # required
+          stepName: embed_target # required. will fail the step if ambiguous
+#           branchName: feature/pipe-1234 # optional. May be necessary if other criteria are too ambiguous. No default.
           projectKey: ${project_key} # optional. Default is current project.
           integrations:
             - name: pipAccess
@@ -20,3 +20,10 @@ pipelines:
             - echo “it failed... $nested_run_status”
           onComplete:
             - echo “sending some messages...”
+  - name: embed_target
+    steps:
+      - name: embed_target
+        type: Bash
+        execution:
+          onExecute:
+            - echo "trigger target done execution"
