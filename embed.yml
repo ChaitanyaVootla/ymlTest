@@ -2,7 +2,7 @@ resources:
   - name: gitEmbed
     type: GitRepo
     configuration:
-      gitProvider: gitResource
+      gitProvider: git
       path: ChaitanyaVootla/ymlTest
 pipelines:
   - name: embedTest
