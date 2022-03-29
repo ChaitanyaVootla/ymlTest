@@ -1,4 +1,9 @@
-
+resources:
+  - name: gitEmbed
+      type: GitRepo
+      configuration:
+        gitProvider: gitResource
+        path: ChaitanyaVootla/ymlTest
 pipelines:
   - name: embedTest
     steps:
@@ -9,6 +14,8 @@ pipelines:
           stepName: embed_target # required. will fail the step if ambiguous
           integrations:
             - name: pipAccess
+          inputResources:
+           - name: gitEmbed
         execution:
           onStart:
             - echo “triggering the nested run”
