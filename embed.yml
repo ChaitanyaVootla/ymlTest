@@ -7,8 +7,6 @@ pipelines:
         configuration:
           pipelineName: embed_target # required
           stepName: embed_target # required. will fail the step if ambiguous
-#           branchName: feature/pipe-1234 # optional. May be necessary if other criteria are too ambiguous. No default.
-          projectKey: ${project_key} # optional. Default is current project.
           integrations:
             - name: pipAccess
         execution:
