@@ -5,17 +5,17 @@ resources:
       key1: value1
       key2: value2
       pipelines: "user_in"
-  - name: propertyCanvas2
-    type: PropertyBag
-    configuration:
-      key1: value1
-      key2: value2
   - name: art
     type: BuildInfo
     configuration:
       sourceArtifactory: art
       buildName: artBuild
       buildNumber: 1
+  - name: gitPip
+    type: GitRepo
+    configuration:
+      gitProvider: git
+      path: ChaitanyaVootla/ymlTest
 pipelines:
   - name: single_test
     configuration:
@@ -58,9 +58,9 @@ pipelines:
           inputResources:
 # #             - name: buildInfoTrigger
             - name: art
-            - name: propertyCanvas2
             - name: propertyCanvas
               trigger: false
+            - name: gitPip
         execution:
           onExecute:
 #             - echo runs > summaryOutput.json
@@ -90,17 +90,17 @@ pipelines:
 #             - name: propertyCanvas
         execution:
           onExecute:
-#             - printenv
-#             - echo "done"
+            - printenv
+            - echo "done"
 #             - write_output propertyCanvas "description=\"hello world\""
 #             - add_pipeline_variables prev_runid=$run_id
 #             - touch testreport.xml
 #             - save_tests testreport.xml
-            - echo runs > cache.file
-            - add_cache_files cache.file runs.file
-            - echo "state=pipeline2" > cache.txt
-            - add_run_files cache.txt run_state_file
-            - add_pipeline_files cache.txt pipe_state_file
-            - write_output propertyCanvas "pipelines=$run_id"
-            - save_tests cache.txt
-            - sleep 100
+#             - echo runs > cache.file
+#             - add_cache_files cache.file runs.file
+#             - echo "state=pipeline2" > cache.txt
+#             - add_run_files cache.txt run_state_file
+#             - add_pipeline_files cache.txt pipe_state_file
+#             - write_output propertyCanvas "pipelines=$run_id"
+#             - save_tests cache.txt
+#             - sleep 100
