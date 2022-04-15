@@ -103,4 +103,3 @@ pipelines:
 #             - add_pipeline_files cache.txt pipe_state_file
 #             - write_output propertyCanvas "pipelines=$run_id"
 #             - save_tests cache.txt
-#             - sleep 100
