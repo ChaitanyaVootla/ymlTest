@@ -5,6 +5,12 @@ resources:
       key1: value1
       key2: value2
       pipelines: "user_in"
+  - name: propertyCanvasOut
+    type: PropertyBag
+    configuration:
+      key1: value1
+      key2: value2
+      pipelines: "user_in"
   - name: art
     type: BuildInfo
     configuration:
@@ -61,6 +67,8 @@ pipelines:
             - name: propertyCanvas
               trigger: false
             - name: gitPip
+          outputResources:
+            - name: propertyCanvasOut
         execution:
           onExecute:
 #             - echo runs > summaryOutput.json
@@ -79,8 +87,15 @@ pipelines:
           environmentVariables:
             step2env1: 1
             step2env2: 2
+          inputResources:
+            - name: art
+            - name: propertyCanvas
+              trigger: false
+            - name: gitPip
           inputSteps:
             - name: trigger_1
+          outputResources:
+            - name: propertyCanvasOut
 #             - name: jenkins
 #           inputResources:
 #             - name: propertyCanvas2
