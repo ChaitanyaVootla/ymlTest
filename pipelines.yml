@@ -92,7 +92,6 @@ pipelines:
             - name: propertyCanvas
               trigger: false
             - name: gitPip
-          asd: asd
           inputSteps:
             - name: trigger_1
           outputResources:
