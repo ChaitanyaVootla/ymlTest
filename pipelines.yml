@@ -92,6 +92,7 @@ pipelines:
             - name: propertyCanvas
               trigger: false
             - name: gitPip
+          asd: asd
           inputSteps:
             - name: trigger_1
           outputResources:
@@ -107,7 +108,6 @@ pipelines:
           onExecute:
             - printenv
             - echo "done"
-              -
 #             - write_output propertyCanvas "description=\"hello world\""
 #             - add_pipeline_variables prev_runid=$run_id
 #             - touch testreport.xml
