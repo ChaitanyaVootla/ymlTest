@@ -144,3 +144,51 @@ pipelines:
         execution:
           onExecute:
             - echo "done"
+      - name: trigger_6
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: trigger_5
+        execution:
+          onExecute:
+            - echo "done"
+      - name: trigger_7
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: trigger_6
+        execution:
+          onExecute:
+      - name: trigger_8
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: trigger_7
+        execution:
+          onExecute:
+            - echo "done"
+      - name: trigger_9
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: trigger_7
+        execution:
+          onExecute:
+            - echo "done"
+      - name: trigger_10
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: trigger_7
+        execution:
+          onExecute:
+            - echo "done"
+      - name: trigger_11
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: trigger_7
+        execution:
+          onExecute:
+            - echo "done"
+            - echo "done"
