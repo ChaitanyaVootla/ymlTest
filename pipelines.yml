@@ -159,6 +159,7 @@ pipelines:
             - name: trigger_6
         execution:
           onExecute:
+            - echo "done"
       - name: trigger_8
         type: Bash
         configuration:
@@ -190,5 +191,4 @@ pipelines:
             - name: trigger_7
         execution:
           onExecute:
-            - echo "done"
             - echo "done"
