@@ -119,3 +119,28 @@ pipelines:
 #             - write_output propertyCanvas "pipelines=$run_id"
 #             - save_tests cache.txt
 
+      - name: trigger_3
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: trigger_2
+        execution:
+          onExecute:
+            - echo "done"
+      - name: trigger_4
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: trigger_2
+        execution:
+          onExecute:
+            - echo "done"
+      - name: trigger_5
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: trigger_3
+            - name: trigger_4
+        execution:
+          onExecute:
+            - echo "done"
