@@ -1,0 +1,38 @@
+resources:
+  - name: popBag
+    type: PropertyBag
+    configuration:
+      key1: value1
+      key2: value2
+      pipelines: "user_in"
+pipelines:
+  - name: pop_start
+    steps:
+      - name: pop_start
+        type: Bash
+        configuration:
+          outputResources:
+            - name: popBag
+        execution:
+          onExecute:
+            - echo "done"
+  - name: pop_lvl_2_1
+    steps:
+      - name: pop_start
+        type: Bash
+        configuration:
+          inputResources:
+            - name: popBag
+        execution:
+          onExecute:
+            - echo "done"
+  - name: pop_lvl_2_2
+    steps:
+      - name: pop_start
+        type: Bash
+        configuration:
+          inputResources:
+            - name: popBag
+        execution:
+          onExecute:
+            - echo "done"
