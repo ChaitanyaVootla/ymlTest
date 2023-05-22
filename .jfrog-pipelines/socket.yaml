@@ -4,18 +4,5 @@ pipelines:
       - name: loader
         type: Bash
         execution:
-          onStart:
-            - |
-              count=180
-              for i in $(seq $count); do
-                echoCount=100
-                echo "loop $count"
-                for i in $(seq $echoCount); do
-                  echo "ping 1"
-                  echo "ping 2"
-                  echo "ping 3"
-                  echo "ping 4"
-                  echo "ping 5"
-                done
-              sleep 1;
-              done
+          onExecute:
+            - echo "new test"
