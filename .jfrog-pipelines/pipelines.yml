@@ -2,7 +2,7 @@ resources:
   - name: propertyCanvas
     type: PropertyBag
     configuration:
-      key1: test
+      key1: value1
       key2: value2
       pipelines: "user_in"
   - name: propertyCanvasOut
