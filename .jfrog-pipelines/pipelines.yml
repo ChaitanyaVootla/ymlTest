@@ -20,3 +20,8 @@ pipelines:
           onExecute:
             - printenv
             - echo "done test asd "
+      - name: trigger_2
+        type: Bash
+        execution:
+          onExecute:
+            - echo "trig 2"
