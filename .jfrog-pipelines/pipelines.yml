@@ -24,4 +24,4 @@ pipelines:
         type: Bash
         execution:
           onExecute:
-            - echo "trigs 3"
+            - echo "trigs asd3"
