@@ -19,4 +19,4 @@ pipelines:
         execution:
           onExecute:
             - printenv
-            - echo "done"
+            - echo "done 2"
