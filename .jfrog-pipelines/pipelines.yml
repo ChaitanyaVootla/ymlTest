@@ -22,6 +22,9 @@ pipelines:
             - echo "done test asd "
       - name: trigger_2
         type: Bash
+        configuration:
+          inputSteps:
+            - name: trigger_1
         execution:
           onExecute:
             - echo "trigs asd2"
