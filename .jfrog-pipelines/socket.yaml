@@ -5,4 +5,4 @@ pipelines:
         type: Bash
         execution:
           onExecute:
-            - echo "new test master commit"
+            - echo "new test master commit test"
