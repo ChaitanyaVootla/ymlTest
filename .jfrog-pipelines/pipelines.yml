@@ -7,4 +7,4 @@ pipelines:
         type: Bash
         execution:
           onExecute:
-            - echo "done"
+            - echo "done 2"
