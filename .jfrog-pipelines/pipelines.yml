@@ -1,30 +1,10 @@
+valuesFilePath: ./values.yaml
+
 pipelines:
-  - name: single_test
-    configuration:
-      environmentVariables:
-        readOnly:
-          pipevar1: 1
-          pipevar2: 2
+  - name: values_test
     steps:
-      - name: trigger_1
+      - name: "{{ .Values.stepName }}"
         type: Bash
-        configuration:
-          affinityGroup: trigger
-          environmentVariables:
-            env1: 1
-            env2:
-              default: 2
-              description: someDescription
-          priority: 0
         execution:
           onExecute:
-            - printenv
-            - echo "done test asd "
-      - name: trigger_2
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: trigger_1
-        execution:
-          onExecute:
-            - echo "trigs asd2"
+            - echo "done"
