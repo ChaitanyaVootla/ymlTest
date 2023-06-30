@@ -23,7 +23,7 @@ resources:
       gitProvider: git
       path: ChaitanyaVootla/ymlTest
 pipelines:
-  - name: single_test
+  - name: single_test_demo
     configuration:
       environmentVariables:
         readOnly:
