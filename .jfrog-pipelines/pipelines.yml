@@ -1,7 +1,7 @@
 valuesFilePath: ./values.yaml
 
 pipelines:
-  - name: values_test
+  - name: values_test_2
     steps:
       - name: "{{ .Values.stepName }}"
         type: Bash
