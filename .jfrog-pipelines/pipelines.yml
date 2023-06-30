@@ -30,7 +30,7 @@ pipelines:
           pipevar1: 1
           pipevar2: 2
     steps:
-      - name: trigger_1
+      - name: trigger_1_demo
         type: Bash
         configuration:
           affinityGroup: trigger
