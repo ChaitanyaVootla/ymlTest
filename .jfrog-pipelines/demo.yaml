@@ -10,7 +10,7 @@ pipelines:
         type: Bash
         configuration:
           inputSteps:
-            - name: step_one_1
+            - name: step_one
         execution:
           onExecute:
             - echo "done"
