@@ -1,7 +1,7 @@
 pipelines:
   - name: github_demo_test
     steps:
-      - name: step_one_1
+      - name: step_one
         type: Bash
         execution:
           onExecute:
