@@ -1,0 +1,8 @@
+pipelines:
+  - name: demo_test_github
+    steps:
+      - name: step_one
+        type: Bash
+        execution:
+          onExecute:
+            - echo "done"
