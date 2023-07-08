@@ -6,7 +6,7 @@ pipelines:
         execution:
           onExecute:
             - echo "done"
-      - name: step_two2sss
+      - name: step_two2ssss
         type: Bash
         configuration:
           inputSteps:
