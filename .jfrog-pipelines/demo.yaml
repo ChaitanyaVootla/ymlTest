@@ -13,4 +13,4 @@ pipelines:
             - name: step_one
         execution:
           onExecute:
-            - echo "asd"
+            - echo "test"
