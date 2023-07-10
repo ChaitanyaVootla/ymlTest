@@ -5,4 +5,4 @@ pipelines:
         type: Bash
         execution:
           onExecute:
-            - echo "dosdasdne2s"
+            - echo "test"
