@@ -6,3 +6,11 @@ pipelines:
         execution:
           onExecute:
             - echo "asd"
+      - name: step_two
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: step_one
+        execution:
+          onExecute:
+            - echo "two"
