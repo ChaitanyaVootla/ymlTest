@@ -1,0 +1,9 @@
+pipelines:
+  - name: long_test
+    steps:
+      - name: long_test
+        type: Bash
+        execution:
+          onExecute:
+            - echo ""
+      
