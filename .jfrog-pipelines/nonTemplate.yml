@@ -1,0 +1,8 @@
+pipelines:
+  - name: non_template
+    steps:
+      - name: test
+        type: Bash
+        execution:
+          onExecute:
+            - echo "done"
