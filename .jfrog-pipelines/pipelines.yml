@@ -3,7 +3,7 @@ valuesFilePath: ./values.yaml
 pipelines:
   - name: values_test_2
     steps:
-      - name: "{{ .Values.stepName }}"
+      - name: {{ .Values.stepName }}
         type: Bash
         execution:
           onExecute:
