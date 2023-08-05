@@ -1,13 +1,10 @@
 valuesFilePath: ./values.yaml
 
 pipelines:
-  - name: values_test_2
+  - name: {{ .Values.pipeline.name }}
     steps:
-      - name: {{ .Values.stepName }}
+      - name: {{ .Values.pipeline.step_identifier }}
         type: Bash
         execution:
           onExecute:
             - echo "branch is {{gitBranch}}"
-            - echo "root bucket is {{.jfrog-pipelines.rootBucket}}"
-            - echo "source repo is {{.jfrog-pipelines.sourceRepository}}"
-            - echo "rt token is {{.jfrog-pipelines.localArtifactory}}"
