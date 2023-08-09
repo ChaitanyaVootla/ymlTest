@@ -21,7 +21,7 @@ pipelines:
           affinityGroup: docker_group
           dockerFileLocation: .jfrog-pipelines/xray/
           dockerFileName: Dockerfile
-          dockerImageName: piptestxray/image
+          dockerImageName: pdeclient.jfrogdev.org/xray/image
           dockerImageTag: ${run_number}
           inputResources:
             - name: app_repo
