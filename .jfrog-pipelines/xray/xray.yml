@@ -4,6 +4,8 @@ resources:
     configuration:
       gitProvider: git
       path: ChaitanyaVootla/ymlTest
+      branches:
+        include: new
 
   - name: app_buildinfo
     type: BuildInfo
