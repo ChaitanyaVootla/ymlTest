@@ -17,9 +17,9 @@ pipelines:
         type: DockerBuild
         configuration:
           affinityGroup: docker_group
-          dockerFileLocation: .
+          dockerFileLocation: xray/
           dockerFileName: Dockerfile
-          dockerImageName: somed
+          dockerImageName: xrayPipTest
           dockerImageTag: ${run_number}
           inputResources:
             - name: app_repo
