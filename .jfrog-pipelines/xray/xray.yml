@@ -1,0 +1,52 @@
+resources:
+  - name: app_repo
+    type: GitRepo
+    configuration:
+      gitProvider: git
+      path: ChaitanyaVootla/ymlTest
+
+  - name: app_buildinfo
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: art
+
+pipelines:
+  - name: app_dev_pipeline
+    steps:
+      - name: app_build
+        type: DockerBuild
+        configuration:
+          affinityGroup: docker_group
+          dockerFileLocation: .
+          dockerFileName: Dockerfile
+          dockerImageName: somed
+          dockerImageTag: ${run_number}
+          inputResources:
+            - name: app_repo
+          integrations:
+            - name: art
+
+      - name: app_push
+        type: DockerPush
+        configuration:
+          affinityGroup: docker_group
+          targetRepository: what
+          integrations:
+            - name: art
+          inputSteps:
+            - name: app_build
+
+      - name: publish_app_build
+        type: PublishBuildInfo
+        configuration:
+          affinityGroup: docker_group
+          inputSteps:
+            - name: app_push
+          outputResources:
+            - name: app_buildinfo
+
+      - name: xrayScanStep
+        type: XrayScan
+        configuration:
+          inputResources:
+            - name: app_buildinfo
