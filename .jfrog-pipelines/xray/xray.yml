@@ -19,7 +19,7 @@ pipelines:
         type: DockerBuild
         configuration:
           affinityGroup: docker_group
-          dockerFileLocation: xray/
+          dockerFileLocation: .jfrog-pipelines/xray/
           dockerFileName: Dockerfile
           dockerImageName: xrayPipTest
           dockerImageTag: ${run_number}
