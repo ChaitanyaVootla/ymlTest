@@ -7,4 +7,4 @@ pipelines:
         type: Bash
         execution:
           onExecute:
-            - echo "branch is {{gitBranch}}"
+            - echo "branch name is {{gitBranch}}"
