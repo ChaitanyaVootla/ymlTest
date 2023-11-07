@@ -1,0 +1,10 @@
+valuesFilePath: ./scripts/values.yml
+pipelines:
+- name: test_pip
+  steps:
+    - name: test_step
+      type: Bash
+      execution:
+        onStart:
+          - echo {{ .Values.test }}
+        
