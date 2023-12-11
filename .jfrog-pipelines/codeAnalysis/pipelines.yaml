@@ -15,7 +15,7 @@ resources:
   - name: sonar_repo_km_21
     type: GitRepo
     configuration:
-      path: kunal-mazumdar/simple-java-maven-app
+      path: {{ .Values.repoPath }}
       gitProvider: {{ .Values.gitProvider }}
       branches:
         include: master
