@@ -2,9 +2,9 @@ taskName: code_analysis
 primaryResource: code_analysis_km
 secondaryResource: code_analysis_publish_km
 gitProvider: git
-artifactory: int_default_artifactory
+artifactory: art
 repoPath: ChaitanyaVootla/ymlTest
-mainBranch: sonar-qa-2
+mainBranch: master
 protocol: https
 buildOnCommit: true
 pipelineName: test_code_analysis_km
