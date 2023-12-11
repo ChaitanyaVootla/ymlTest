@@ -1,9 +1,9 @@
 taskName: code_analysis
 primaryResource: code_analysis_km
 secondaryResource: code_analysis_publish_km
-gitProvider: kunal_gh
+gitProvider: git
 artifactory: int_default_artifactory
-repoPath: kunal-mazumdar/tasks
+repoPath: ChaitanyaVootla/ymlTest
 mainBranch: sonar-qa-2
 protocol: https
 buildOnCommit: true
