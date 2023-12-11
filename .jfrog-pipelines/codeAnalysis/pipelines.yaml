@@ -218,7 +218,7 @@ pipelines:
             - write_output git_sonar_km_1 "vulnerabilities=2"
             - write_output git_sonar_km_1 "security_hotspots=1"
             # coverage 2
-            - write_output git_sonar_km_2 "coverage=20"
+            - write_output git_sonar_km_2 "coverage=$((coverage-5))"
             - write_output git_sonar_km_2 "bugs=5"
             - write_output git_sonar_km_2 "code_smells=12"
             - write_output git_sonar_km_2 "duplicated_lines=100"
