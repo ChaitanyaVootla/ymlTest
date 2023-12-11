@@ -1,0 +1,12 @@
+taskName: code_analysis
+primaryResource: code_analysis_km
+secondaryResource: code_analysis_publish_km
+gitProvider: kunal_gh
+artifactory: int_default_artifactory
+repoPath: kunal-mazumdar/tasks
+mainBranch: sonar-qa-2
+protocol: https
+buildOnCommit: true
+pipelineName: test_code_analysis_km
+publishOnCommit: false
+publishTaskName: sonar-code-analysis_km

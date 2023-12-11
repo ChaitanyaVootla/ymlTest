@@ -1,0 +1,248 @@
+valuesFilePath: ./values.yml
+
+resources:
+  - name: {{ .Values.primaryResource }}
+    type: GitRepo
+    configuration:
+      path: {{ .Values.repoPath }}
+      gitProvider: {{ .Values.gitProvider }}
+      branches:
+        include: ^{{ .Values.mainBranch }}$
+      cloneProtocol: {{ .Values.protocol }}
+      buildOn:
+        commit: {{ .Values.buildOnCommit }}
+
+  - name: sonar_repo_km_21
+    type: GitRepo
+    configuration:
+      path: kunal-mazumdar/simple-java-maven-app
+      gitProvider: {{ .Values.gitProvider }}
+      branches:
+        include: master
+
+  - name: git_sonar_km_1
+    type: CodeAnalysis
+    configuration:
+      integration: sonar_int
+      
+  - name: git_sonar_km_2
+    type: CodeAnalysis
+    configuration:
+      integration: sonar_int     
+
+  - name: git_sonar_staging
+    type: CodeAnalysis
+    configuration:
+      integration: sonar_staging_int
+      
+pipelines:
+  - name: {{ .Values.pipelineName }}
+    configuration:
+      jfrogCliVersion: 2
+      environmentVariables:
+        readOnly:
+          JFROG_TASK_DEBUG: "true"
+          JFROG_CLI_LOG_LEVEL: debug
+    steps:
+      - name: test_{{.Values.taskName }}
+        type: Bash
+        configuration:
+          inputResources:
+            - name: {{ .Values.primaryResource }}
+            - name: sonar_repo_km_21
+          outputResources:
+            - name: git_sonar_km_1
+            - name: git_sonar_km_2
+          integrations:
+            - name: {{ .Values.artifactory }}
+          runtime:
+            type: image
+            image:
+              custom:
+                registry: {{ .Values.artifactory }}
+                sourceRepository: docker-staging-local
+                name: f14182.jfrog-pipelines.com/docker-staging-local/sonar-scanner
+                # name: jpd648669096.jfrogdev.org/docker-staging-local/sonar-scanner
+                tag: latest
+        execution:
+          onStart:
+            - echo "Starting execution on {{ .Values.taskName }}"
+          onExecute:
+#            - pushd ${res_sonar_repo_km_2_resourcePath}
+#            - ls -al
+#            - echo $int_sonar_int_km_url
+#            - echo $int_sonar_int_km_token
+#            - export SONAR_TOKEN=$int_sonar_int_km_token
+#            - sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=kunal-mazumdar -Dsonar.projectKey=kunal-mazumdar_test -Dsonar.branch.name=master
+#            - pushd /tmp
+#            - task: jfrog/sonar-code-analysis@v2.0.1
+            - task: $res_{{ .Values.primaryResource }}_resourcePath/code-analysis
+              id: code_analysis_version
+              input:
+                codeResourceName: git_sonar_km_1
+                gitResourceName: sonar_repo_km_21
+                gitBranch: master
+                orgName: kunal-mazumdar
+                projectKey: kunal-mazumdar_test
+            # - task: $res_{{ .Values.primaryResource }}_resourcePath/code-analysis
+            #   id: code_analysis_version
+            #   input:
+            #     codeResourceName: git_sonar_km_2
+            #     gitResourceName: sonar_repo_km_21
+            #     gitBranch: master
+            #     orgName: nitind123
+            #     projectKey: nitind123_test    
+
+      - name: test_name
+        type: Bash
+        configuration:
+          inputResources:
+            - name: {{ .Values.primaryResource }}
+            - name: sonar_repo_km_21
+          outputResources:
+            - name: git_sonar_km_1
+          integrations:
+            - name: {{ .Values.artifactory }}
+          runtime:
+            type: image
+            image:
+              custom:
+                registry: {{ .Values.artifactory }}
+                sourceRepository: docker-staging-local
+                name: f14182.jfrog-pipelines.com/docker-staging-local/sonar-scanner
+                # name: jpd648669096.jfrogdev.org/docker-staging-local/sonar-scanner
+                tag: latest
+        execution:
+          onStart:
+            - echo "Starting execution on {{ .Values.taskName }}"
+          onExecute:
+#            - pushd ${res_sonar_repo_km_2_resourcePath}
+#            - ls -al
+#            - echo $int_sonar_int_km_url
+#            - echo $int_sonar_int_km_token
+#            - export SONAR_TOKEN=$int_sonar_int_km_token
+#            - sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=kunal-mazumdar -Dsonar.projectKey=kunal-mazumdar_test -Dsonar.branch.name=master
+#            - pushd /tmp
+#            - task: jfrog/sonar-code-analysis@v2.0.1
+            - task: $res_{{ .Values.primaryResource }}_resourcePath/code-analysis
+              id: code_analysis_version
+              input:
+                codeResourceName: git_sonar_km_1
+                gitResourceName: sonar_repo_km_21
+                gitBranch: master
+                orgName: nitind123
+                projectKey: nitind123_test
+
+
+      - name: sonar_staging
+        type: Bash
+        configuration:
+          inputResources:
+            - name: {{ .Values.primaryResource }}
+            - name: sonar_repo_km_21
+          outputResources:
+            - name: git_sonar_staging
+          integrations:
+            - name: {{ .Values.artifactory }}
+          runtime:
+            type: image
+            image:
+              custom:
+                registry: {{ .Values.artifactory }}
+                sourceRepository: docker-staging-local
+                name: f14182.jfrog-pipelines.com/docker-staging-local/sonar-scanner
+                tag: latest
+        execution:
+          onExecute:
+            - task: $res_{{ .Values.primaryResource }}_resourcePath/code-analysis
+              id: code_analysis_version
+              input:
+                codeResourceName: git_sonar_staging
+                gitResourceName: sonar_repo_km_21
+                gitBranch: master
+                projectKey: kmtest
+                
+      - name: pr_test
+        type: Bash
+        configuration:
+          inputResources:
+            - name: {{ .Values.primaryResource }}
+            - name: sonar_repo_km_21
+          outputResources:
+            - name: git_sonar_km_1
+          integrations:
+            - name: {{ .Values.artifactory }}
+          runtime:
+            type: image
+            image:
+              custom:
+                registry: {{ .Values.artifactory }}
+                sourceRepository: docker-staging-local
+                name: f14182.jfrog-pipelines.com/docker-staging-local/sonar-scanner
+                # name: jpd648669096.jfrogdev.org/docker-staging-local/sonar-scanner
+                tag: latest
+        execution:
+          onExecute:
+            - task: $res_{{ .Values.primaryResource }}_resourcePath/code-analysis
+              id: code_analysis_version
+              input:
+                codeResourceName: git_sonar_km_1
+                gitResourceName: sonar_repo_km_21
+                gitBranch: master
+                orgName: kunal-mazumdar
+                projectKey: kunal-mazumdar_test
+                extraSonarOptions: "-Dsonar.pullrequest.key=1 -Dsonar.pullrequest.branch=feature -Dsonar.pullrequest.base=master"
+
+
+  - name: {{ .Values.pipelineName }}_win
+    configuration:
+      jfrogCliVersion: 2
+      environmentVariables:
+        readOnly:
+          JFROG_TASK_DEBUG: "true"
+          JFROG_CLI_LOG_LEVEL: debug
+    steps:
+      - name: test_{{.Values.taskName }}
+        type: Powershell
+        configuration:
+          nodePool: win_2019
+          inputResources:
+            - name: {{ .Values.primaryResource }}
+            - name: sonar_repo_km_21
+          outputResources:
+            - name: git_sonar_km_1
+        execution:
+          onExecute:
+            - task: $res_{{ .Values.primaryResource }}_resourcePath/code-analysis
+              id: code_analysis_version
+              input:
+                codeResourceName: git_sonar_km_1
+                gitResourceName: sonar_repo_km_21
+                gitBranch: master
+                orgName: kunal-mazumdar
+                projectKey: kunal-mazumdar_test
+                
+  - name: {{ .Values.pipelineName }}_local
+    configuration:
+      jfrogCliVersion: 2
+      environmentVariables:
+        readOnly:
+          JFROG_TASK_DEBUG: "true"
+          JFROG_CLI_LOG_LEVEL: debug
+    steps:
+      - name: test_{{.Values.taskName }}
+        type: Bash
+        configuration:
+          outputResources:
+            - name: git_sonar_km_1
+        execution:
+          onExecute:
+            - write_output git_sonar_km_1 "coverage=54.0"
+            - write_output git_sonar_km_1 "bugs=2"
+            - write_output git_sonar_km_1 "code_smells=4"
+            - write_output git_sonar_km_1 "duplicated_lines=10"
+            - write_output git_sonar_km_1 "tests=3"
+            - write_output git_sonar_km_1 "duplicated_blocks=0"
+            - write_output git_sonar_km_1 "ncloc=4000"
+            - write_output git_sonar_km_1 "vulnerabilities=2"
+            - write_output git_sonar_km_1 "security_hotspots=1"
