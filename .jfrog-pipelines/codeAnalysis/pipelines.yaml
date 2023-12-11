@@ -207,7 +207,7 @@ pipelines:
             - name: git_sonar_km_1
         execution:
           onExecute:
-            - write_output git_sonar_km_1 "coverage=$reportsCount"
+            - write_output git_sonar_km_1 "coverage=$coverage"
             - write_output git_sonar_km_1 "bugs=2"
             - write_output git_sonar_km_1 "code_smells=4"
             - write_output git_sonar_km_1 "duplicated_lines=10"
