@@ -194,33 +194,33 @@ pipelines:
                 extraSonarOptions: "-Dsonar.pullrequest.key=1 -Dsonar.pullrequest.branch=feature -Dsonar.pullrequest.base=master"
 
 
-  - name: {{ .Values.pipelineName }}_win
-    configuration:
-      jfrogCliVersion: 2
-      environmentVariables:
-        readOnly:
-          JFROG_TASK_DEBUG: "true"
-          JFROG_CLI_LOG_LEVEL: debug
-    steps:
-      - name: test_{{.Values.taskName }}
-        type: Powershell
-        configuration:
-          nodePool: win_2019
-          inputResources:
-            - name: {{ .Values.primaryResource }}
-            - name: sonar_repo_km_21
-          outputResources:
-            - name: git_sonar_km_1
-        execution:
-          onExecute:
-            - task: $res_{{ .Values.primaryResource }}_resourcePath/code-analysis
-              id: code_analysis_version
-              input:
-                codeResourceName: git_sonar_km_1
-                gitResourceName: sonar_repo_km_21
-                gitBranch: master
-                orgName: kunal-mazumdar
-                projectKey: kunal-mazumdar_test
+  # - name: {{ .Values.pipelineName }}_win
+  #   configuration:
+  #     jfrogCliVersion: 2
+  #     environmentVariables:
+  #       readOnly:
+  #         JFROG_TASK_DEBUG: "true"
+  #         JFROG_CLI_LOG_LEVEL: debug
+  #   steps:
+  #     - name: test_{{.Values.taskName }}
+  #       type: Powershell
+  #       configuration:
+  #         nodePool: win_2019
+  #         inputResources:
+  #           - name: {{ .Values.primaryResource }}
+  #           - name: sonar_repo_km_21
+  #         outputResources:
+  #           - name: git_sonar_km_1
+  #       execution:
+  #         onExecute:
+  #           - task: $res_{{ .Values.primaryResource }}_resourcePath/code-analysis
+  #             id: code_analysis_version
+  #             input:
+  #               codeResourceName: git_sonar_km_1
+  #               gitResourceName: sonar_repo_km_21
+  #               gitBranch: master
+  #               orgName: kunal-mazumdar
+  #               projectKey: kunal-mazumdar_test
                 
   - name: {{ .Values.pipelineName }}_local
     configuration:
