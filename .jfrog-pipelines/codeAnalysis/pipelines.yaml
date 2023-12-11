@@ -217,6 +217,8 @@ pipelines:
             - write_output git_sonar_km_1 "ncloc=4000"
             - write_output git_sonar_km_1 "vulnerabilities=2"
             - write_output git_sonar_km_1 "security_hotspots=1"
+            # coverage 2
+            - write_output git_sonar_km_2 "coverage=$((coverage-5))"
             - write_output git_sonar_km_2 "coverage=$coverage"
             - write_output git_sonar_km_2 "bugs=2"
             - write_output git_sonar_km_2 "code_smells=4"
