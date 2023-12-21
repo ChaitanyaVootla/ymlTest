@@ -43,6 +43,7 @@ pipelines:
         execution:
           onExecute:
             - printenv
+            - sleep 1000
             - echo "done"
   - name: trigger_test
     configuration:
